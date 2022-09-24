@@ -1,0 +1,26 @@
+{% extends 'cabinet.html' %}
+{% load static %}
+{% block title %} Профиль {% endblock %}
+{% static "/images/badges" as badgesUrl %}
+
+
+
+{% block cabinet %}
+<div class="profile">
+  <div class="box_avatar" style="background-image: url({{ user.profile.photo_200_orig }});"></div>
+  <h1 class="profile_username">{{ user.first_name }} {{ user.last_name }}</h1>
+  <h3>{{ user.profile.city_title }}</h3>
+
+  <div class="badges">
+    {% if badges %}
+      <h2>Значки:</h2>
+      {% for badge in badges %}
+        {% with 'images/badges/'|add:badge.src as image_static %}
+          <div class="profile_badge" alt="{{ badge.title }}" title="{{ badge.title }}" style="background-image:  url({% static image_static %});"></div>
+        {% endwith %}
+      {% endfor %}
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}

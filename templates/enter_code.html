@@ -1,0 +1,15 @@
+{% extends 'cabinet.html' %}
+{% load static %}
+{% block title %} Ввести код {% endblock %}
+
+{% block cabinet %}
+<div class="code_enter">
+  <label for="enter">Ведите код:</label>
+
+  <form class="code_enter" action='submit_code' method='post'>
+    {% csrf_token %}
+    <input name='invite_code' class="filter_input" id="enter"></input>
+    <button class="box_btn">Отправить</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} VK Finder {% endblock %}
+{% block content %}
+<div class="intro">
+  <div class="container">
+    <div class="intro__inner">
+      {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+      {% if not user.username %}
+      <h4 class="intro__title">Нажмите на кнопку, <br/> а об остальном позаботимся мы</h4>
+
+      <div class="intro__button">
+       <form action="{% url "social:begin" "vk-oauth2" %}">
+           <button class="btn" type="submit">Найти друзей</button>
+       </form>
+       {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

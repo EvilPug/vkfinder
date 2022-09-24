@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  {% if message %}<div class="error_message">{{ message }}</div> {% endif %}
+  <div class="main">
+    <div class="white_strip"></div>
+
+    <div class="cabinet_title">
+      {% block title %}{% endblock %}
+    </div>
+
+    <div class="side_menu">
+      <h1>Меню</h1>
+      <a class="side_menu_links" href="/">Главная</a>
+      <a class="side_menu_links" href="{% url 'profile' %}">Профиль</a>
+      <a class="side_menu_links" href="{% url 'favorite' %}">Избранное</a>
+      <a class="side_menu_links" href="{% url 'enter_code' %}">Ввести код</a>
+    </div>
+
+    {% if filter_enabled %}
+    <div class="filter">
+      <label for="filter_search">Поиск:</label>
+      <input class="filter_input" id="filter_search"></input>
+
+      <label for="filter_sex_select">Пол:</label>
+      <select class="filter_select" id="filter_sex_select">
+        <option value="any">Любой</option>
+        <option value="male">Мужской</option>
+        <option value="female">Женский</option>
+      </select>
+    </div>
+    {% endif %}
+
+
+    <div class="content">
+      {% block cabinet %}
+      {% endblock %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+ <head>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+  <title>{% block title %}{% endblock %} VK Finder</title>
+ </head>
+
+<header class="header">
+  <div class="container">
+    <div class="header_inner">
+      <div class="logo"><a class='logo__btn' href='/'>VK Finder</a></div>
+
+      <nav class="nav">
+        <div class="dropdown">
+          {% if user.username %}
+          <button class="dropbtn">{{ user.first_name }} {{ user.last_name }}</button>
+          <div class="dropdown-content">
+            {% if user.is_superuser %}<a class="rainbow" href="/admin/">Админка</a>{% endif %}
+            <a href="{% url 'profile' %}">Профиль</a>
+            <a href="{% url 'logout' %}">Выйти</a>
+          </div>
+        </div>
+        {% else %}<a class="nav__link" href="{% url "social:begin" "vk-oauth2" %}">Войти</a>
+        {% endif %}
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+ <body>
+   {% block content %}
+   {% endblock %}
+ </body>
+</html>

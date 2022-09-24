@@ -1,0 +1,22 @@
+{% extends 'cabinet.html' %}
+{% load static %}
+{% block title %} Избранное {% endblock %}
+
+{% block cabinet %}
+  {% for person in favorite_users %}
+    <div class="box">
+      <div class="box_avatar" style="background-image: url({{ person.photo_200_orig }});"></div>
+      <div class="box_info">
+        <div class="name_surname">
+          <a target="_blank" class="name_surname" href="https://www.vk.com/id{{ person.id }}">{{ person.first_name }} <br> {{ person.last_name }}</a>
+        </div>
+
+        <h3>{{ person.city_title }}</h3>
+        <form action="{% url 'favorite_delete' person.id %}" method="post">
+          {% csrf_token %}
+        <button class="box_btn">Удалить</button>
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}
